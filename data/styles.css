@@ -1,0 +1,186 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+  height: 100%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+super {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #191a21;
+  height: 76px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+nav img {
+  position: absolute;
+  left: 44%;
+  right: 50%;
+}
+
+.battery {
+  position: relative;
+}
+
+.battery_draw {
+  height: 20px;
+  width: 46px;
+  border: 2px solid #F1F1F1;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+.battery_draw::before {
+  content: '';
+  position: absolute;
+  height: 14px;
+  width: 6px;
+  background: #F1F1F1;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 3px 3px 0;
+}
+
+.battery_part {
+  position: absolute;
+  height: calc(100% - 5px);
+  border-radius: 3px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  background-color: #f0f0f0;
+}
+
+.mainWrapper {
+  display: flex;
+}
+
+.leftButton_container {
+  display: flex;
+  align-items: center;
+  padding-right: 60px;
+}
+
+.rightButton_container {
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+
+.padButtons {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  color: rgb(98, 177, 241);
+  font-size: 28px;
+  background-color: #202023;
+  border: none;
+}
+
+.padButtons:active {
+  transform: scale(1.10);
+}
+
+.leftButton {
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+  background-color: #dbdbdb;
+}
+
+.footer_container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.footer_container.fc1 {
+  display: inline-flex;
+}
+
+.footer_battery_label {
+  padding-right: 5px;
+}
+
+.footer_battery_value {
+  padding-right: 5px;
+}
+
+.opening {
+  color: #362cdf;
+}
+
+.connected {
+  display: none;
+  color: #2aa511;
+}
+
+.unconnected {
+  display: none;
+  color: brown;
+}
+
+error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  font-size: 24px;
+}
+
+@media all and (orientation:portrait) {
+  super {
+    display: none;
+  }
+
+  error {
+    display: flex;
+  }
+}
+
+@media all and (orientation:landscape) {
+  super {
+    display: flex;
+  }
+
+  error {
+    display: none;
+  }
+}

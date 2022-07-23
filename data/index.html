@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>
+    GSECEE - Controle Joystick
+  </title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <script src="./core.js"></script>
+</head>
+
+<body>
+  <super>
+    <nav>
+      <img src="./logo.png" width="85px" height="40px" />
+      <div class="nav_right">
+        <div class="battery">
+          <div class="battery_draw">
+            <div id="battery_part" class="battery_part"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="mainWrapper">
+        <div class="leftButton_container">
+          <button id="fullscreen" class="padButtons leftButton" onclick="fullScreenToogle()">
+            Ir tela cheia
+          </button>
+        </div>
+        <div class="canvas_container">
+          <canvas id="canvas_joystick"></canvas>
+        </div>
+        <div class="rightButton_container">
+          <button class="padButtons rightButton" onclick="sendButton()">X</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer_container fc1">
+        <div class="footer_battery_label">
+          Bateria:
+        </div>
+        <div class="footer_battery_value" id="battery_value_text">
+
+        </div>
+      </div>
+      <div class="footer_container fc2">
+        <div class="opening" id="opening">
+          Abrindo...
+        </div>
+        <div class="connected" id="connected">
+          Conectado
+        </div>
+        <div class="unconnected" id="unconnected">
+          Não conectado
+        </div>
+      </div>
+    </footer>
+  </super>
+  <error>
+    Gire o celular na horizontal
+  </error>
+
+  <div style="display: none">
+    DEBUG: Vel: <span id="speed">0</span>% |
+    Ang: <span id="angle">0</span> |
+    Botão: <span id="button">0</span>
+  </div>
+</body>
+
+</html>

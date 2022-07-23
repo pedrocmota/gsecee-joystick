@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "*.json": "jsonc",
+    "*.env": "env",
+    "*.env.example": "env",
+    "*.tcc": "cpp",
+    "fstream": "cpp"
+  }
+}
