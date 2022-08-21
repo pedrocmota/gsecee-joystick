@@ -2,7 +2,7 @@
 
 Um controle remoto com um joystick, usando a API WEB Socket do ESP32
 
-<img src="https://gcdnb.pbrd.co/images/mg0qDhTgUryt.jpg" title="" alt="App Screenshot" width="629">
+<img src="https://drive.google.com/uc?id=1m6Jkav8GXGq3rZuPQSOl_zdJgX7FZ7Ev" title="" alt="App Screenshot" width="629">
 
 ## Instalação
 

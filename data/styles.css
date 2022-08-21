@@ -29,7 +29,7 @@ nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: #191a21;
+  background-color: #0e0ec7;
   height: 76px;
   padding-left: 25px;
   padding-right: 25px;
@@ -93,7 +93,7 @@ main {
 .rightButton_container {
   display: flex;
   align-items: center;
-  padding-left: 60px;
+  padding-left: 240px;
 }
 
 .padButtons {
@@ -140,6 +140,16 @@ footer {
 
 .footer_battery_value {
   padding-right: 5px;
+}
+
+.footer_fullscreen {
+  color: rgb(36, 108, 167);
+  margin-left: 10px;
+}
+
+.footer_reconnect {
+  color: rgb(36, 108, 167);
+  margin-left: 20px;
 }
 
 .opening {

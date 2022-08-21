@@ -8,6 +8,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name=apple-mobile-web-app-capable content=yes>
 
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
@@ -29,11 +30,6 @@
 
     <main>
       <div class="mainWrapper">
-        <div class="leftButton_container">
-          <button id="fullscreen" class="padButtons leftButton" onclick="fullScreenToogle()">
-            Ir tela cheia
-          </button>
-        </div>
         <div class="canvas_container">
           <canvas id="canvas_joystick"></canvas>
         </div>
@@ -49,7 +45,13 @@
           Bateria:
         </div>
         <div class="footer_battery_value" id="battery_value_text">
-
+          0%
+        </div>
+        <div class="footer_fullscreen" id="fullscreen" onclick="fullScreenToogle()">
+          Tela cheia
+        </div>
+        <div class="footer_reconnect" id="reconnect" onclick="reconnect()">
+          Reconectar
         </div>
       </div>
       <div class="footer_container fc2">

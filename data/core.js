@@ -1,55 +1,71 @@
-let connection = new WebSocket(`ws://${window.location.hostname}/ws`)
+let connection
 let connected = false
 let inFullScreen = false
 
-connection.onopen = () => {
-  document.getElementById('opening').style.display = 'none'
-  document.getElementById('connected').style.display = 'block'
-  document.getElementById('unconnected').style.display = 'none'
-  connected = true
-}
-
-connection.onerror = (error) => {
-  document.getElementById('opening').style.display = 'none'
-  document.getElementById('connected').style.display = 'none'
-  document.getElementById('unconnected').style.display = 'block'
-  connected = false
-  console.error(error)
-}
-
-connection.onmessage = (e) => {
-  const data = JSON.parse(e.data);
-  if (data["vbat"]) {
-    const vbat = parseInt(data["vbat"])
-    const vbatEle = document.getElementById("battery_part")
-    const vbatText = document.getElementById("battery_value_text")
-    if (vbat == 0) {
-      vbat = 5
-    }
-    vbatEle.style.width = `calc(${vbat}% - 6px)`;
-    vbatText.innerText = `${vbat}%`
-    if (vbat < 20) {
-      vbatEle.style.backgroundColor = "#c4270c";
-    } else if (vbat < 70) {
-      vbatEle.style.backgroundColor = "#b85a0d";
-    } else {
-      vbatEle.style.backgroundColor = "#2aa511";
-    }
+const openConnection = () => {
+  connection = new WebSocket(`ws://${window.location.hostname}/ws`)
+  connection.onopen = () => {
+    document.getElementById('opening').style.display = 'none'
+    document.getElementById('connected').style.display = 'block'
+    document.getElementById('unconnected').style.display = 'none'
+    connected = true
   }
-};
+
+  connection.onerror = (error) => {
+    document.getElementById('opening').style.display = 'none'
+    document.getElementById('connected').style.display = 'none'
+    document.getElementById('unconnected').style.display = 'block'
+    connected = false
+    console.error(error)
+  }
+
+  connection.onmessage = (e) => {
+    const data = JSON.parse(e.data);
+    if (data["vbat"]) {
+      const vbat = parseInt(data["vbat"])
+      const vbatEle = document.getElementById("battery_part")
+      const vbatText = document.getElementById("battery_value_text")
+      if (vbat == 0) {
+        vbat = 5
+      }
+      vbatEle.style.width = `calc(${vbat}% - 6px)`;
+      vbatText.innerText = `${vbat}%`
+      if (vbat < 20) {
+        vbatEle.style.backgroundColor = "#c4270c";
+      }
+      else {
+        vbatEle.style.backgroundColor = "#2aa511";
+      }
+    }
+  };
+}
+
+const reconnect = () => {
+  document.getElementById('opening').style.display = 'block'
+  document.getElementById('connected').style.display = 'none'
+  document.getElementById('unconnected').style.display = 'none'
+  openConnection()
+}
+
+openConnection()
 
 const fullScreenToogle = () => {
   if (inFullScreen) {
-    document.exitFullscreen()
     document.getElementById('fullscreen').innerHTML = 'Ir tela cheia'
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    }
   } else {
-    document.documentElement.requestFullscreen()
     document.getElementById('fullscreen').innerHTML = 'Sair tela cheia'
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen()
+    }
   }
   inFullScreen = !inFullScreen
 }
 
 const send_joystick = (speed, angle) => {
+  // console.log(speed, angle)
   if (connected) {
     var data = {"velocidade": speed, "angulo": angle}
     data = JSON.stringify(data)
