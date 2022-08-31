@@ -1,8 +1,10 @@
 #include <ArduinoJson.h>
+#include <pwm.h>
 #include <server.h>
 
 void setup() {
   Serial.begin(115200);
+  initPWM();
   initServer();
 }
 

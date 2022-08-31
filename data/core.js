@@ -64,14 +64,62 @@ const fullScreenToogle = () => {
   inFullScreen = !inFullScreen
 }
 
-const send_joystick = (speed, angle) => {
-  // console.log(speed, angle)
+let lastSpeed = null
+let lastDirection = null
+
+const send_joystick = (velocidade, angulo) => {
+  let direcao = null
+  if (angulo <= 120 && angulo > 60) {
+    direcao = 'cima'
+  }
+  //superior direito
+  if (angulo <= 60 && angulo > 30) {
+    direcao = 'superior_direito'
+  }
+  //direito
+  if ((angulo <= 30 && angulo > 0) || (angulo < 360 && angulo > 330)) {
+    direcao = 'direita'
+  }
+  //inferior direito
+  if (angulo <= 330 && angulo > 300) {
+    direcao = 'inferior_direito'
+  }
+  //inferior
+  if (angulo <= 300 && angulo > 240) {
+    direcao = 'inferior'
+  }
+  //inferior esquerdo
+  if (angulo <= 240 && angulo > 210) {
+    direcao = 'inferior_esquerdo'
+  }
+  //esquerdo
+  if (angulo <= 210 && angulo > 150) {
+    direcao = 'esquerda'
+  }
+  //superior esquerdo
+  if (angulo <= 150 && angulo > 120) {
+    direcao = 'superior_esquerdo'
+  }
+  if (angulo === 0 || velocidade === 0) {
+    direcao = 'parado'
+  }
   if (connected) {
-    var data = {"velocidade": speed, "angulo": angle}
-    data = JSON.stringify(data)
-    connection.send(data)
+    if ((lastDirection !== direcao || lastSpeed !== velocidade) && direcao !== null) {
+      lastSpeed = velocidade
+      lastDirection = direcao
+      var data = {
+        velocidade: velocidade,
+        direcao: direcao
+      }
+      data = JSON.stringify(data)
+      connection.send(data)
+    }
   }
 }
+
+let rightButton = document.getElementById("rightButton")
+let timer = 1
+let timerInterval = 0
 
 const sendButton = () => {
   if (connected) {
@@ -80,6 +128,29 @@ const sendButton = () => {
     connection.send(data)
   }
 }
+
+rightButton.addEventListener("touchstart", function () {
+  timerInterval = setInterval(function () {
+    if (timer < 8) {
+      timer += 1;
+    }
+  }, 100);
+})
+
+rightButton.addEventListener("touchend", function () {
+  let force = parseInt((timer * 255 / 8).toFixed(0))
+  clearInterval(timerInterval);
+  timer = 1;
+
+  if (connected) {
+    var data = {
+      button: 'button1',
+      force: force
+    }
+    data = JSON.stringify(data)
+    connection.send(data)
+  }
+})
 
 let canvas_joystick, ctx_joystick, ctx_button
 

@@ -12,12 +12,11 @@
 
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
-  <script src="./core.js"></script>
 </head>
 
 <body>
   <super>
-    <nav>
+    <nav ondblclick="fullScreenToogle()">
       <img src="./logo.png" width="85px" height="40px" />
       <div class="nav_right">
         <div class="battery">
@@ -34,7 +33,7 @@
           <canvas id="canvas_joystick"></canvas>
         </div>
         <div class="rightButton_container">
-          <button class="padButtons rightButton" onclick="sendButton()">X</button>
+          <button class="padButtons rightButton" id="rightButton">X</button>
         </div>
       </div>
     </main>
@@ -67,7 +66,7 @@
       </div>
     </footer>
   </super>
-  <error>
+  <error onclick="fullScreenToogle()">
     Gire o celular na horizontal
   </error>
 
@@ -76,6 +75,8 @@
     Ang: <span id="angle">0</span> |
     Botão: <span id="button">0</span>
   </div>
+
+  <script src="./core.js"></script>
 </body>
 
 </html>

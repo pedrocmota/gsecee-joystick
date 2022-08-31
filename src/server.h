@@ -6,6 +6,7 @@
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
 #include <WiFi.h>
+#include <pwm.h>
 
 char ssid[] = "GSECEE Joystick";
 char *senha = (char *)"12345678";
@@ -26,15 +27,18 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t length) {
     StaticJsonDocument<jsonSize> json;
     DeserializationError error = deserializeJson(json, data, length);
 
-    if (json.containsKey("angulo") && json.containsKey("velocidade")) {
-      int16_t angulo = json["angulo"];
+    if (json.containsKey("direcao") && json.containsKey("velocidade")) {
+      String direcao = json["direcao"];
       int16_t velocidade = json["velocidade"];
-      Serial.printf("Angulo: %d  -  Velocidade: %d\n", angulo, velocidade);
+      updateControl(direcao, velocidade);
+      // Serial.printf("Direção: %s  -  Velocidade: %d\n", direcao.c_str(), velocidade);
     }
 
     if (json.containsKey("button")) {
       String button = json["button"];
-      Serial.printf("Botão: %s\n", button);
+      int force = json["force"];
+      // Serial.printf("Button: %s  -  Força: %d\n", button.c_str(), force);
+      setButtonPWM(force);
     }
   }
 }
